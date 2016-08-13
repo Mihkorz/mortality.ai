@@ -5,6 +5,9 @@ from django.conf import settings
 from django import forms
 from django.utils.safestring import mark_safe
 
+from django_countries.fields import LazyTypedChoiceField, Country
+from django_countries.widgets import CountrySelectWidget
+from django_countries import countries
 
 class nnBloodForm(forms.Form):
     
@@ -40,6 +43,11 @@ class nnBloodForm(forms.Form):
     Lymphocytes = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Lymphocyte' target='_blank'>Lymphocytes**</a>"),
                                       required=False, help_text='20 - 40 %', widget=forms.NumberInput(attrs={'class': 'form-control '}), 
                                       min_value=0, max_value=98)#min_value=20, max_value=40) 
+    country = LazyTypedChoiceField(choices=countries)
+    
+    class Meta:
+        widgets = {'country': CountrySelectWidget(attrs={'class': 'form-control '})}
+
 
 
 class IndexPage(TemplateView):
@@ -79,5 +87,30 @@ class InputForm(FormView):
         return context
     
     def form_valid(self, form):
+        context = self.get_context_data()
+         
+        height = self.request.POST['height']
+        weight = self.request.POST['weight']
+        smoke = self.request.POST['smoke']
         
+        country = self.request.POST['country']
+        
+        aaa = Country(country)
+        iso = aaa.alpha3
+        
+        raise Exception('form')
         pass
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

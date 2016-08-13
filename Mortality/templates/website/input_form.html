@@ -10,12 +10,14 @@
     <meta name="description" content="Insilico Medecine">
     <meta name="author" content="Insilico Medecine">
 
-    <title>Input Form | Mortality.AI</title>
+    <title>Mortality.AI | Input Form </title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/{% static 'css/template.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+     
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,7 +39,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand topnav" href="/form/">
-                <img src='/{% static "images/logo_pol.png" %}' style="display:inline; height:30px;"/> &nbsp;
+                <img src='/{% static "images/insilico_logo.png" %}' style="display:inline; height:30px;"/>
                 Mortality.AI</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -68,13 +70,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1><img src='/{% static "images/logo_pol.png" %}' style="display:inline; height:100px;"/> Mortality.AI</h1>
+                        <h1><img src='/{% static "images/insilico_logo.png" %}' style="display:inline; height:150px;"/> Mortality.AI</h1>
                         <h3>A Deep Learned predictor of mortality</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             
                             <li>
-                                <a href="#" class="btn btn-success btn-lg">
+                                <a href="#form_inp" class="btn btn-success btn-lg">
                                   <span class="network-name">Fill the form</span>
                                  </a>
                             </li>
@@ -171,16 +173,44 @@
           
           <input type='hidden' name='metric' value='{{metric}}' />
           
-          Enter your weight: <input type='text' name='weight' class='form-control' style="width:50px; display:inline;"/> kg
+          Age: <input type='text' name='age' class='form-control' style="width:50px; display:inline;"/> years 
+          &nbsp;&nbsp;&nbsp;
+          Sex:  
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="sex" id="option1" autocomplete="off" checked> Male
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="sex" id="option2" autocomplete="off"> Female
+            </label>
+          </div>
+          <br/><br/>
+          
+          Weight: <input type='text' name='weight' class='form-control' style="width:50px; display:inline;"/> kg
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Enter your height: <input type='text' name='height' class='form-control' style="width:50px; display:inline;"/> cm
+          Height: <input type='text' name='height' class='form-control' style="width:50px; display:inline;"/> cm
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Do you smoke? &nbsp; <label class="radio-inline">          
-  <input type="radio" name="smoke" id="inlineRadio1" value="yes"> Yes
-</label>
-<label class="radio-inline">
-  <input type="radio" name="smoke" id="inlineRadio2" value="no" checked> No
-</label>
+          
+          <br/><br/>
+          Ethnicity: {{form.country}}
+          
+          <br/><br/>
+          
+          Do you smoke?
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="smoke" id="option3" autocomplete="off" value='Yes'> Yes
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="smoke" id="option4" autocomplete="off" value='No'> No
+            </label>
+          </div>
+          <br/>
+          
+          
+          <br/>
+          
+          
 
 
           
@@ -200,16 +230,19 @@
              </thead>
              <tbody>
                {% for f in form %}
+               {%if f.label != 'Country'%}
                  <tr>
                    <td>{{f.label}}</td>
                    <td>{{f}}</td>
                    <td>{{f.help_text|safe}}</td>    
                  </tr>
+               {%endif%}
                {%endfor%}
+               
              </tbody>  
            </table>
            
-           <div class='submitDiv' style='text-align:center; margin: 20px 0 10px 0; padding: 0 0 0 200px;'>
+           <div class='submitDiv' style='text-align:center; margin: 20px 0 10px 0; padding: 0 0 0 0px;'>
              
              <input type="submit" id='submitBtn' value="Submit" class="btn btn-success btn-lg" />
            </div>
@@ -285,5 +318,25 @@ Email: zhu(at)insilicomedicine.com<br/>
             </div>
         </div>
     </footer>
+<!-- jQuery -->
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+
+<!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+
+$(function () { 
+	
+	$("#id_country").addClass('form-control country_input');
+	
+})
+
+
+	
+	//
+
+
+</script>
 
 </body>
