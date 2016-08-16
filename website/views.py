@@ -253,7 +253,7 @@ class InputForm(FormView):
                               activity = activity,
                               mental_health = mental,
                               input_file = File(upload),
-                              predicted_age = age,
+                              predicted_age = predicted_age,
                               
                               expected_longevity = expected_longevity)
         
