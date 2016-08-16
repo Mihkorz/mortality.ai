@@ -13,7 +13,7 @@
     <title>Mortality.AI | Input Form </title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/{% static 'css/template.css' %}" rel="stylesheet">
+    <link href="{% static 'css/template.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
      
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand topnav" href="/form/">
-                <img src='/{% static "images/insilico_logo.png" %}' style="display:inline; height:30px;"/>
+                <img src='{% static "images/insilico_logo.png" %}' style="display:inline; height:30px;"/>
                 Mortality.AI</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1><img src='/{% static "images/insilico_logo.png" %}' style="display:inline; height:150px;"/> Mortality.AI</h1>
+                        <h1><img src='{% static "images/insilico_logo.png" %}' style="display:inline; height:150px;"/> Mortality.AI</h1>
                         <h3>A Deep Learned predictor of mortality</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
@@ -168,48 +168,110 @@
 <hr/>
 <div class="container">
 
-          <form action="" method="post" id='nnBloodForm'>
+          <form action="" method="post" id='nnMortalityForm'>
           <div class='form1' style="text-align:left; margin: 0 0 10px 0;">
           
           <input type='hidden' name='metric' value='{{metric}}' />
           
-          Age: <input type='text' name='age' class='form-control' style="width:50px; display:inline;"/> years 
+          Age: <input type='number' name='age' min="1" max="120" class='form-control' style="width:100px; display:inline;"/>&nbsp; years 
           &nbsp;&nbsp;&nbsp;
-          Sex:  
+          Sex:&nbsp;  
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
-              <input type="radio" name="sex" id="option1" autocomplete="off" checked> Male
+              <input type="radio" name="sex" id="option1" autocomplete="off" value='1'> Male
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="sex" id="option2" autocomplete="off"> Female
+              <input type="radio" name="sex" id="option2" autocomplete="off" value='0'> Female
             </label>
           </div>
           <br/><br/>
           
-          Weight: <input type='text' name='weight' class='form-control' style="width:50px; display:inline;"/> kg
+          Weight:&nbsp; <input type='text' name='weight' min="1" max="300" class='form-control' style="width:100px; display:inline;"/>&nbsp; kg
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Height: <input type='text' name='height' class='form-control' style="width:50px; display:inline;"/> cm
+          Height:&nbsp; <input type='text' name='height' min="1" max="400" class='form-control' style="width:100px; display:inline;"/>&nbsp; cm
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
           <br/><br/>
-          Ethnicity: {{form.country}}
+          <table class='table table-borderless'>
+          <tr>
+          <td>
+          Ethnicity:
+          </td>
+          <td>
+           {{form.country}}
+          </td>
+          </tr>
           
-          <br/><br/>
           
-          Do you smoke?
+          <tr>
+          <td>
+          Do you smoke? &nbsp;&nbsp;
+          </td>
+          <td>
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
-              <input type="radio" name="smoke" id="option3" autocomplete="off" value='Yes'> Yes
+              <input type="radio" name="smoke" id="smoke0" autocomplete="off" value='0'> Never smoked
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="smoke" id="option4" autocomplete="off" value='No'> No
+              <input type="radio" name="smoke" id="smok1" autocomplete="off" value='1'> Former smoker
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="smoke" id="smoke2" autocomplete="off" value='2'> Current light smoker
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="smoke" id="smoke3" autocomplete="off" value='3'> Current heavy smoker
             </label>
           </div>
-          <br/>
+          </td>
+          </tr>
+          <tr>
+          <td>
+          Alcohol consumption: &nbsp;&nbsp;
+          </td>
+          <td>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol0" autocomplete="off" value='0'> Non-drinker
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol1" autocomplete="off" value='1'> < 1 drink/month
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol2" autocomplete="off" value='2'> 0-4 drinks/week
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol3" autocomplete="off" value='3'> 5-9 drinks/week
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol4" autocomplete="off" value='4'> 10-24 drinks/week
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol5" autocomplete="off" value='5'> Heavy drinker
+            </label>
+          </div>
+          </td>        
+          </tr>
+          <tr>
+          <td>
+          Activity: &nbsp;&nbsp;
+          </td>
+          <td>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="activity" id="activity0" autocomplete="off" value='0'> Low
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="activity" id="activity1" autocomplete="off" value='1'> Moderate
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="activity" id="activity2" autocomplete="off" value='2'> High
+            </label>
+            
+          </div>
+          </td>        
+          </tr>
           
-          
-          <br/>
-          
+          </table>
           
 
 
@@ -306,7 +368,7 @@ Email: zhu(at)insilicomedicine.com<br/>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#services">Fill the form</a>
+                            <a href="#form_inp">Fill the form</a>
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
@@ -323,6 +385,8 @@ Email: zhu(at)insilicomedicine.com<br/>
 
 <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!--  Insilico Script -->
+    <script   src="{% static 'js/mortality.js' %}"  ></script>
 
 <script>
 

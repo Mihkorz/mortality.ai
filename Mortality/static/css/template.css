@@ -24,6 +24,10 @@ h6 {
     font-weight: 700;
 }
 
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
+    border: none;
+}
+
 .topnav {
     font-size: 14px; 
 }
