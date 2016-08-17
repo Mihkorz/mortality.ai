@@ -104,10 +104,9 @@
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">How it's done</h2>
+                    <h2 class="section-heading">{{how_its_done.header}}</h2>
                     <p class="lead">
-                    This is a deep learned predictor of mortality, which guesses the year of death using blood biochemistry, clinical and demographic data. 
-                    This is a deep learned predictor of mortality, which guesses the year of death using blood biochemistry, clinical and demographic data. 
+                      {{how_its_done.text}} 
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
@@ -128,31 +127,17 @@
                 <div class="col-lg-5 col-sm-6" >
                     <hr class="section-heading-spacer desciption">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Description:</h2>
+                    <h2 class="section-heading">{{desc.header}}:</h2>
                     <p class="lead">
-                   This is a deep learned predictor of mortality, which guesses
-                    the year of death using blood biochemistry, clinical and 
-                    demographic data. Warning: please carefully read the disclaimer
-                     and instructions carefully before entering Mortality.AI. You
-                      must be over 18 years old to enter. By pressing yes you agree
-                       to the terms and conditions described here. The authors make
-                        no claims on the accuracy of the system and this system should
-                         not be used for any purposes other than entertainment and 
-                         research collaborations. If you are not satisfied with 
-                         the time you have left, please consider the following 
-                         options: take the test again, reduce the various risk 
-                         factors, engage in aging research
-                         </p>
+                      {{desc.text}}
+                    </p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Quick rules:</h2>
+                    <h2 class="section-heading">{{rules.header}}</h2>
                     <p class="lead">
-                    This is a deep learned predictor of mortality, which guesses
-                    the year of death using blood biochemistry, clinical and 
-                    demographic data. Warning: please carefully read the disclaimer
-                     and instructions carefully before entering Mortality.AI.
+                      {{rules.text}}
                     </p>
                 </div>
             </div>
@@ -165,7 +150,7 @@
     
     
 
-<hr/>
+
 <div class="container">
 
           <form action="" method="post" id='nnMortalityForm'>
@@ -270,7 +255,22 @@
           </div>
           </td>        
           </tr>
-          
+          <tr>
+          <td>
+          Social Status: &nbsp;&nbsp;
+          </td>
+          <td>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="social_status" id="social_status0" autocomplete="off" value='0'> Poor social life
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="social_status" id="social_status1" autocomplete="off" value='1'> Good social life
+            </label>
+            
+          </div>
+          </td>
+          </tr>
           </table>
           
 
@@ -319,8 +319,10 @@
          
          </div>
 </div> <!-- .container -->
+
+<br/><br/><br/><br/>
 <a  name="contact"></a>
-<hr/>
+
 
 <div class="container">
 

@@ -26,28 +26,17 @@
     <br/><br/>
     <div class="row" >
       <div class="col-xs-12 text-center">
-        <h1><img src='{% static "images/insilico_logo.png" %}' style='height:150px;'/> Welcome to Mortality.AI</h1>
+        <h1><img src='{% static "images/insilico_logo.png" %}' style='height:150px;'/>{{start_page_text.header}}</h1>
       </div>
       
       <div class="row" >
       
         <div class="col-xs-12 text-center intro_container">
-          <p class="intro">
-          This is a deep learned predictor of mortality, which guesses the year of death using
-blood biochemistry, clinical and demographic data.
-          </p>
           
-          <p class="intro">Warning: please carefully read the disclaimer and instructions carefully before entering
-Mortality.AI. You must be over 18 years old to enter. By pressing yes you agree to the
-terms and conditions described here.</p>
-          <p class="intro">The authors make no claims on the accuracy of the system and this system should not
-be used for any purposes other than entertainment and research collaborations.</p>
-          <p class="intro">If you are not satisfied with the time you have left, please consider the following
-options: take the test again, reduce the various risk factors, engage in aging research</p>
-
-          <p class="intro">Please visit some of the other resources we helped develop including
-www.Aging.AIPlease visit some of the other resources we helped develop including
-www.Aging.AI and www.Embryonic.AI ( Watch the VIDEO)</p>
+          {{start_page_text.text|safe}}
+          
+          
+         
           <br/>
          <p class='intro'>
             

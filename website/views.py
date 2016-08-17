@@ -19,7 +19,7 @@ from django_countries.widgets import CountrySelectWidget
 from django_countries import countries
 
 from core.algorythm import ages_left
-from .models import RunnedTest
+from .models import RunnedTest, Article
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -81,7 +81,7 @@ class IndexPage(TemplateView):
         context = super(IndexPage, self).get_context_data(**kwargs)
         
         
-        context['test'] = 'TEST VAR'
+        context['start_page_text'] = Article.objects.get(idx='start_page_text')
         
         return context
     
@@ -101,6 +101,9 @@ class InputForm(FormView):
     def get_context_data(self, **kwargs):
         context = super(InputForm, self).get_context_data(**kwargs)
         
+        context['how_its_done'] = Article.objects.get(idx='how_its_done')
+        context['rules'] = Article.objects.get(idx='rules')
+        context['desc'] = Article.objects.get(idx='desc')
         
         context['metric'] = self.metric        
         context['document'] = 'input_document'
@@ -135,7 +138,7 @@ class InputForm(FormView):
         alcohol = int(self.request.POST.get('alcohol', 1))
         activity = int(self.request.POST.get('activity', 1))
         
-        social_status = True #2 b implemented later
+        social_status = int(self.request.POST.get('social_status', 1))
         mental = False #2 b implemented later
         
         
@@ -217,7 +220,7 @@ class InputForm(FormView):
             predicted_age = 0
             median_age = age
             
-            #raise
+            raise
         
             
         

@@ -71,5 +71,10 @@ class RunnedTest(models.Model):
     
     expected_longevity = models.FloatField("Expected Longevity", default=0, blank=True)
     
-    
+class Article(models.Model):
+    idx = models.CharField("Identificator", max_length=300, blank=False,
+                           help_text = "Used to place text in the required container on page. Don't change")
+    header = models.CharField("Header", max_length=300, blank=False,
+                           help_text = "Text header")
+    text = models.TextField(blank=False,)    
     
