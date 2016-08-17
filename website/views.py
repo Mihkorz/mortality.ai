@@ -128,7 +128,7 @@ class InputForm(FormView):
         if not weight:
             weight = 70.8
         
-        bmi = (weight/(height**2))*10000
+        bmi = format((weight/(height**2))*10000, '.2f')
         
         country = self.request.POST.get('country')
         objCountry = Country(country)
@@ -215,7 +215,7 @@ class InputForm(FormView):
             arResult = result.split('\n')
             predicted_age = arResult[0]
             
-            median_age = np.median([predicted_age, age])
+            median_age = np.median([float(predicted_age), float(age)])
         except:
             predicted_age = 0
             median_age = age
