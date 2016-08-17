@@ -37,7 +37,10 @@ h6 {
     font-size: 14px; 
 }
 
-.lead {
+ol li{
+	padding: 5px 0;
+}
+.lead, .lead p {
     font-size: 18px;
     font-weight: 400;
     /*background: rgba(0, 0, 0, 0.6);*/

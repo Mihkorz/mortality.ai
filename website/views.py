@@ -220,7 +220,7 @@ class InputForm(FormView):
             predicted_age = 0
             median_age = age
             
-            raise
+            #raise
         
             
         

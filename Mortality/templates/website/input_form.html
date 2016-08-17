@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load markdown_deux_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,7 +107,7 @@
                     <div class="clearfix"></div>
                     <h2 class="section-heading">{{how_its_done.header}}</h2>
                     <p class="lead">
-                      {{how_its_done.text}} 
+                      {{how_its_done.text|markdown}} 
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
@@ -125,11 +126,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-sm-6" >
-                    <hr class="section-heading-spacer desciption">
+                    <hr class="section-heading-spacer ">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">{{desc.header}}:</h2>
                     <p class="lead">
-                      {{desc.text}}
+                      {{desc.text|markdown}}
                     </p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
@@ -137,7 +138,7 @@
                     <div class="clearfix"></div>
                     <h2 class="section-heading">{{rules.header}}</h2>
                     <p class="lead">
-                      {{rules.text}}
+                      {{rules.text|markdown}}
                     </p>
                 </div>
             </div>
@@ -150,17 +151,29 @@
     
     
 
-
-<div class="container">
+<hr class='section-heading-spacer' style='width:80%; float:none;'/>
+<br/>
+<div class="container" style='clear:both'>
 
           <form action="" method="post" id='nnMortalityForm'>
           <div class='form1' style="text-align:left; margin: 0 0 10px 0;">
           
           <input type='hidden' name='metric' value='{{metric}}' />
           
-          Age: <input type='number' name='age' min="1" max="120" class='form-control' style="width:100px; display:inline;"/>&nbsp; years 
+          <table class='table table-borderless'>
+          <tr>
+          <td>
+          
+          Age: &nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;
-          Sex:&nbsp;  
+           <input type='number' name='age' min="18" max="120" class='form-control' style="width:100px; display:inline;"/>&nbsp; years 
+          
+          <br/><br/>
+          Weight:&nbsp; <input type='text' name='weight' min="1" max="300" class='form-control' style="width:100px; display:inline;"/>&nbsp; kg
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>
+          Sex:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
               <input type="radio" name="sex" id="option1" autocomplete="off" value='1'> Male
@@ -169,18 +182,15 @@
               <input type="radio" name="sex" id="option2" autocomplete="off" value='0'> Female
             </label>
           </div>
-          <br/><br/>
-          
-          Weight:&nbsp; <input type='text' name='weight' min="1" max="300" class='form-control' style="width:100px; display:inline;"/>&nbsp; kg
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <br/><br/>
           Height:&nbsp; <input type='text' name='height' min="1" max="400" class='form-control' style="width:100px; display:inline;"/>&nbsp; cm
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
-          <br/><br/>
-          <table class='table table-borderless'>
+          </td></tr>
+          
           <tr>
           <td>
-          Ethnicity:
+          Current country of residence:
           </td>
           <td>
            {{form.country}}
@@ -271,6 +281,23 @@
           </div>
           </td>
           </tr>
+          <tr>
+          <td>
+          Active mental disorders: &nbsp;&nbsp;
+          </td>
+          <td>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="mental_health" id="mental_health0" autocomplete="off" value='0'> No
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="mental_health" id="mental_health1" autocomplete="off" value='1'> Yes
+            </label>
+            
+          </div>
+          </td>
+          </tr>
+          
           </table>
           
 
