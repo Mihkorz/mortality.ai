@@ -38,9 +38,9 @@ h6 {
 }
 
 ol li{
-	padding: 5px 0;
+	padding: 0px 0;
 }
-.lead, .lead p {
+.lead, .lead p, p, ol li {
     font-size: 18px;
     font-weight: 400;
     /*background: rgba(0, 0, 0, 0.6);*/

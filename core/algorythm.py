@@ -58,8 +58,9 @@ def country_data(person_country, age, gender):
         for line in person_country_file:
             splitted_line = [float(x) for x in line[:-1].split("\t")]
             line_dict = dict(zip(["min", "max", 0, 1], splitted_line))
-            if line_dict["min"] < age <= line_dict["max"]:
+            if line_dict["min"] <= age <= line_dict["max"]:
                 return line_dict[gender]
+    
 
 
 def bmi_effect(height, weight, gender):

@@ -165,27 +165,32 @@
           <td>
           
           Age: &nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;
-           <input type='number' name='age' min="18" max="120" class='form-control' style="width:100px; display:inline;"/>&nbsp; years 
+          &nbsp;&nbsp;&nbsp;&nbsp;
+           <input type='number' name='age' min="18" max="90" 
+                  class='form-control' style="width:100px; display:inline;" required/>&nbsp; years 
           
           <br/><br/>
-          Weight:&nbsp; <input type='text' name='weight' min="1" max="300" class='form-control' style="width:100px; display:inline;"/>&nbsp; kg
+          Weight:&nbsp; <input type='number' name='weight' min="1" max="300" id="weight_input"
+                               class='form-control' style="width:100px; display:inline;" required/>&nbsp; kg
+          <br/><br/>
+          Height:&nbsp;&nbsp; <input type='number' name='height' min="1" max="400" id='height_input'
+                               class='form-control' style="width:100px; display:inline;" required/>&nbsp; cm
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </td>
           <td>
-          Sex:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+          Sex:	&nbsp;&nbsp;&nbsp;  
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
-              <input type="radio" name="sex" id="option1" autocomplete="off" value='1'> Male
+              <input type="radio" name="sex" id="option1" autocomplete="off" value='1' required> Male
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="sex" id="option2" autocomplete="off" value='0'> Female
+              <input type="radio" name="sex" id="option2" autocomplete="off" value='0' required> Female
             </label>
           </div>
-           <br/><br/>
-          Height:&nbsp; <input type='text' name='height' min="1" max="400" class='form-control' style="width:100px; display:inline;"/>&nbsp; cm
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          
+           <div style='margin: 50px 0 0 0'>
+           <a href='https://en.wikipedia.org/wiki/Body_mass_index' target='_blank'>BMI:</a>
+            &nbsp;&nbsp;<span id='bmi_rate'>0</span>
+           </div>
           </td></tr>
           
           <tr>
@@ -197,6 +202,33 @@
           </td>
           </tr>
           
+           <tr>
+          <td>
+          Alcohol consumption: &nbsp;&nbsp;
+          </td>
+          <td>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol0" autocomplete="off" value='0' required> Non-drinker
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol1" autocomplete="off" value='1' required> < 1 drink/month
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol2" autocomplete="off" value='2' required> 0-4 drinks/week
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol3" autocomplete="off" value='3' required> 5-9 drinks/week
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol4" autocomplete="off" value='4' required> 10-24 drinks/week
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="alcohol" id="alcohol5" autocomplete="off" value='5' required> Heavy drinker
+            </label>
+          </div>
+          </td>        
+          </tr>
           
           <tr>
           <td>
@@ -205,66 +237,21 @@
           <td>
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
-              <input type="radio" name="smoke" id="smoke0" autocomplete="off" value='0'> Never smoked
+              <input type="radio" name="smoke" id="smoke0" autocomplete="off" value='0' required> Never smoked
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="smoke" id="smok1" autocomplete="off" value='1'> Former smoker
+              <input type="radio" name="smoke" id="smok1" autocomplete="off" value='1' required> Former smoker
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="smoke" id="smoke2" autocomplete="off" value='2'> Current light smoker
+              <input type="radio" name="smoke" id="smoke2" autocomplete="off" value='2' required> Current light smoker
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="smoke" id="smoke3" autocomplete="off" value='3'> Current heavy smoker
+              <input type="radio" name="smoke" id="smoke3" autocomplete="off" value='3' required> Current heavy smoker
             </label>
           </div>
           </td>
           </tr>
-          <tr>
-          <td>
-          Alcohol consumption: &nbsp;&nbsp;
-          </td>
-          <td>
-          <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-success">
-              <input type="radio" name="alcohol" id="alcohol0" autocomplete="off" value='0'> Non-drinker
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="alcohol" id="alcohol1" autocomplete="off" value='1'> < 1 drink/month
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="alcohol" id="alcohol2" autocomplete="off" value='2'> 0-4 drinks/week
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="alcohol" id="alcohol3" autocomplete="off" value='3'> 5-9 drinks/week
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="alcohol" id="alcohol4" autocomplete="off" value='4'> 10-24 drinks/week
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="alcohol" id="alcohol5" autocomplete="off" value='5'> Heavy drinker
-            </label>
-          </div>
-          </td>        
-          </tr>
-          <tr>
-          <td>
-          Activity: &nbsp;&nbsp;
-          </td>
-          <td>
-          <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-success">
-              <input type="radio" name="activity" id="activity0" autocomplete="off" value='0'> Low
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="activity" id="activity1" autocomplete="off" value='1'> Moderate
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="activity" id="activity2" autocomplete="off" value='2'> High
-            </label>
-            
-          </div>
-          </td>        
-          </tr>
+          
           <tr>
           <td>
           Social Status: &nbsp;&nbsp;
@@ -272,15 +259,36 @@
           <td>
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
-              <input type="radio" name="social_status" id="social_status0" autocomplete="off" value='0'> Poor social life
+              <input type="radio" name="social_status" id="social_status0" autocomplete="off" value='0' required> Poor social life
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="social_status" id="social_status1" autocomplete="off" value='1'> Good social life
+              <input type="radio" name="social_status" id="social_status1" autocomplete="off" value='1' required> Good social life
             </label>
             
           </div>
           </td>
           </tr>
+          
+          <tr>
+          <td>
+          Activity: &nbsp;&nbsp;
+          </td>
+          <td>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-success">
+              <input type="radio" name="activity" id="activity0" autocomplete="off" value='0' required> Low
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="activity" id="activity1" autocomplete="off" value='1' required> Moderate
+            </label>
+            <label class="btn btn-success">
+              <input type="radio" name="activity" id="activity2" autocomplete="off" value='2' required> High
+            </label>
+            
+          </div>
+          </td>        
+          </tr>
+          
           <tr>
           <td>
           Active mental disorders: &nbsp;&nbsp;
@@ -288,10 +296,10 @@
           <td>
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-success">
-              <input type="radio" name="mental_health" id="mental_health0" autocomplete="off" value='0'> No
+              <input type="radio" name="mental_health" id="mental_health0" autocomplete="off" value='0' required> No
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="mental_health" id="mental_health1" autocomplete="off" value='1'> Yes
+              <input type="radio" name="mental_health" id="mental_health1" autocomplete="off" value='1' required> Yes
             </label>
             
           </div>

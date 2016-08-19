@@ -29,8 +29,31 @@
     };
 })(jQuery);
 
+function calculate_bmi(){
+	$("#bmi_rate").text();
+	weight = $("#weight_input").val();
+	height = $("#height_input").val();
+	if(!height) bmi=0;
+	if(!weight) bmi=0;
+	
+	if(weight && height) bmi = (weight/(height*height))*10000;
+	
+	
+	
+	$("#bmi_rate").text(Math.round(bmi).toFixed(2));
+	
+}
+
 $(function () { 
 	
 	$("#nnMortalityForm  input[type='number'] ").each(function(){$(this).restrict()});
+	
+	//BMI calculations
+	
+	$("#weight_input").change(function(){calculate_bmi()});
+	$("#height_input").change(function(){calculate_bmi()});
+	
+	
+	
 	
 });
