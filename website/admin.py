@@ -10,6 +10,7 @@ class RunnedTestAdmin(admin.ModelAdmin):
     list_display = ('id', 
                     'ip',
                     'datetime',
+                    'metric',
                     'age',
                     'predicted_age',
                     'sex',

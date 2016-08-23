@@ -46,14 +46,69 @@ function calculate_bmi(){
 
 $(function () { 
 	
+	// substitute with min\max values if input value exceeds them
 	$("#nnMortalityForm  input[type='number'] ").each(function(){$(this).restrict()});
 	
-	//BMI calculations
+	// BMI calculations	
+	$("#weight_input").keyup(function(){calculate_bmi()});
+	$("#height_input").keyup(function(){calculate_bmi()});
 	
-	$("#weight_input").change(function(){calculate_bmi()});
-	$("#height_input").change(function(){calculate_bmi()});
+	// substitude alcohol buttons basing on chosen gender
+	$('#sex_selector label.btn').click(function() {
+	    $(this).addClass('active').siblings().removeClass('active');
+	    
+	    var sex = $(this).find("input").val();
+	    
+	    if (sex==0){ 
+	    	$("#alcohol_select").html('<label class="btn btn-success"> \
+	                <input type="radio" name="alcohol" id="alcohol0" autocomplete="off" value="0" required> Non-drinker \
+	              </label> \
+	              <label class="btn btn-success"> \
+	                <input type="radio" name="alcohol" id="alcohol1" autocomplete="off" value="1" required> < 1 drink/month \
+	              </label> \
+	              <label class="btn btn-success"> \
+	                <input type="radio" name="alcohol" id="alcohol2" autocomplete="off" value="2" required> 0-2 drinks/week \
+	              </label> \
+	              <label class="btn btn-success"> \
+	                <input type="radio" name="alcohol" id="alcohol3" autocomplete="off" value="3" required> 3-5 drinks/week \
+	              </label> \
+	              <label class="btn btn-success"> \
+	                <input type="radio" name="alcohol" id="alcohol4" autocomplete="off" value="4" required> 6-17 drinks/week &nbsp; \
+	              </label> \
+	              <label class="btn btn-success"> \
+	                <input type="radio" name="alcohol" id="alcohol5" autocomplete="off" value="5" required> Heavy drinker \
+	              </label>');
+	    }
+	    else{
+	    	$("#alcohol_select").html('<label class="btn btn-success"> \
+              <input type="radio" name="alcohol" id="alcohol0" autocomplete="off" value="0" required> Non-drinker \
+            </label> \
+            <label class="btn btn-success"> \
+              <input type="radio" name="alcohol" id="alcohol1" autocomplete="off" value="1" required> < 1 drink/month \
+            </label> \
+            <label class="btn btn-success"> \
+              <input type="radio" name="alcohol" id="alcohol2" autocomplete="off" value="2" required> 0-4 drinks/week \
+            </label> \
+            <label class="btn btn-success"> \
+              <input type="radio" name="alcohol" id="alcohol3" autocomplete="off" value="3" required> 5-9 drinks/week \
+            </label> \
+            <label class="btn btn-success"> \
+              <input type="radio" name="alcohol" id="alcohol4" autocomplete="off" value="4" required> 10-24 drinks/week \
+            </label> \
+            <label class="btn btn-success"> \
+              <input type="radio" name="alcohol" id="alcohol5" autocomplete="off" value="5" required> Heavy drinker \
+            </label>');
+	    }
+	    
+
+	    // TODO: insert whatever you want to do with $(this) here
+	});
 	
 	
-	
+	$("#submitBtn").click(function(){
+		if($("#nnMortalityForm").valid() {
+		    $("#pathmodal").modal("show");
+		}
+	});	
 	
 });

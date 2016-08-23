@@ -56,6 +56,7 @@ class RunnedTest(models.Model):
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
     input_file = models.FileField("Blood markers file", blank=True)
     predicted_age = models.FloatField("Predicted age", default='0', blank=True)
+    metric = models.CharField(max_length=2, default='eu', blank=True)
     
     age = models.FloatField("Age", default=0, blank=True)
     sex = models.IntegerField("Sex", default=1, choices=SEX_TYPES, blank=True)

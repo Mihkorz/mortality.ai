@@ -150,7 +150,14 @@
     <!-- /.content-section-a -->
     
     
-
+<hr class='section-heading-spacer' style='width:80%; float:none;' />
+<div class=" center" style='text-align:center;'>          
+            First choose the sample metric:&nbsp; <div class="btn-group" role="group" aria-label="...">
+  <button type="button" class="btn btn-default {%if metric == 'eu' %}active{%endif%}"
+  onclick="location.href='/form/?m=eu#form_inp';">European</button>
+  <button type="button" class="btn btn-default {%if metric == 'us' %}active{%endif%}" 
+  onclick="location.href='/form/?m=us#form_inp';">US</button>
+</div>
 <hr class='section-heading-spacer' style='width:80%; float:none;'/>
 <br/>
 <div class="container" style='clear:both'>
@@ -171,20 +178,22 @@
           
           <br/><br/>
           Weight:&nbsp; <input type='number' name='weight' min="1" max="300" id="weight_input"
-                               class='form-control' style="width:100px; display:inline;" required/>&nbsp; kg
+                               class='form-control' style="width:100px; display:inline;" required/>&nbsp; 
+                               {%if metric == 'us' %} lb {%else%} kg{%endif%} 
           <br/><br/>
           Height:&nbsp;&nbsp; <input type='number' name='height' min="1" max="400" id='height_input'
-                               class='form-control' style="width:100px; display:inline;" required/>&nbsp; cm
+                               class='form-control' style="width:100px; display:inline;" required/>&nbsp; 
+                               {%if metric == 'us' %} inches {%else%} cm{%endif%}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </td>
           <td>
           Sex:	&nbsp;&nbsp;&nbsp;  
-          <div class="btn-group" data-toggle="buttons">
+          <div class="btn-group" data-toggle="buttons" id='sex_selector'>
             <label class="btn btn-success">
-              <input type="radio" name="sex" id="option1" autocomplete="off" value='1' required> Male
+              <input type="radio" name="sex" id="sex1" autocomplete="off" value='1' required> Male
             </label>
             <label class="btn btn-success">
-              <input type="radio" name="sex" id="option2" autocomplete="off" value='0' required> Female
+              <input type="radio" name="sex" id="sex0" autocomplete="off" value='0' required> Female
             </label>
           </div>
            <div style='margin: 50px 0 0 0'>
@@ -207,7 +216,7 @@
           Alcohol consumption: &nbsp;&nbsp;
           </td>
           <td>
-          <div class="btn-group" data-toggle="buttons">
+          <div class="btn-group" data-toggle="buttons" id='alcohol_select'>
             <label class="btn btn-success">
               <input type="radio" name="alcohol" id="alcohol0" autocomplete="off" value='0' required> Non-drinker
             </label>
@@ -417,6 +426,25 @@ Email: zhu(at)insilicomedicine.com<br/>
             </div>
         </div>
     </footer>
+    
+   <!-- MODAL FOR CALCULATION  -->
+    <div id="pathmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+        <h4 class="modal-title" id="myModalLabel">Predicting ages left...</h4>
+      </div>
+      <div class="modal-body" id='modalBody'>
+       <img src='/static/images/deep-network.jpg' style='width:100%'/>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+    
 <!-- jQuery -->
     <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 

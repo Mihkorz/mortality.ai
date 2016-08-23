@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load markdown_deux_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +15,10 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'css/template.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-social.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    
+    
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
      
     <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
@@ -72,18 +77,37 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1><img src='{% static "images/insilico_logo.png" %}' style="display:inline; height:150px;"/> Mortality.AI</h1>
-                        <h3>A Deep Learned predictor of mortality says you have {{expected_longevity}} years left</h3>
+                        <h3>{{result_text.header}} {{expected_longevity}} years left</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
-                            
                             <li>
-                                <a href="/form/#form_inp" class="btn btn-success btn-lg">
-                                  <span class="network-name">Run another test</span>
-                                 </a>
+                              <a class="btn btn-lg btn-block btn-social btn-facebook" onclick="">
+                              <span class="fa fa-facebook"></span> Facebook
+                              </a>
+                            </li>
+                            <li>
+                              <a class="btn btn-lg btn-block btn-social btn-twitter" onclick="">
+                              <span class="fa fa-twitter"></span> Twitter                               </a>
+                            </li>
+                            <li>
+                              <a class="btn btn-lg btn-block btn-social btn-github" onclick="">
+                              <span class="fa fa-github"></span> Github                               </a>
                             </li>
                             
+                            
                         </ul>
+                        <br/>
+                        <div class='result_text'>
+                        
+                        {{result_text.text|markdown}}
+                        
+                        </div>
                     </div>
+                    
+                    <a href="/form/#form_inp" class="btn btn-success btn-lg">
+                                  <span class="network-name">Run another test</span>
+                    </a>
+                    
                 </div>
             </div>
 

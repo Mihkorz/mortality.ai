@@ -69,6 +69,44 @@ class nnBloodForm(forms.Form):
         widgets = {'country': CountrySelectWidget(attrs={'class': 'form-control '})}
 
 
+class nnBloodFormUS(forms.Form):
+    """ TOP 10 markers """
+    
+    Albumen = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Serum_albumin' target='_blank'>Albumin**</a>"),
+                                  required=False, help_text='3.5 - 5.5 U/L', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=0.1, max_value=7.23)#min_value=35, max_value=52)    
+    Glucose = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Glucose' target='_blank'>Glucose**</a>"),
+                                  required=False, help_text='65 - 99 mg/dL', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=6.37, max_value=581.8)#min_value=3.9, max_value=5.8)
+    Alkaline_phosphatase = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Alkaline_phosphatase' target='_blank'>Alkaline phosphatase**</a>"),
+                                               required=False, help_text='39 - 117 IU/L', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=1, max_value=4337)#min_value=20, max_value=120)
+    Urea = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Urea' target='_blank'>Urea**(BUN)</a>"),
+                               required=False, help_text='6 - 24 mg/dL', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=1, max_value=235.6)#min_value=2.5, max_value=6.4)
+    Erythrocytes = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Red_blood_cell' target='_blank'>Erythrocytes** (RBC)</a>"),
+                                       required=False, help_text=mark_safe('3.77 - 5.28  10<sup><small>6</small></sup> /uL'),  widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=0.79, max_value=9.25)#min_value=3.5, max_value=5.5)
+    Cholesterol = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Cholesterol' target='_blank'>Cholesterol**</a>"),
+                                      required=False, help_text='100 - 199 mg/dL', widget=forms.NumberInput(attrs={'class': 'form-control '}), 
+                                      min_value=38.6, max_value=779.5)#min_value=3.37, max_value=5.96)
+    RDW = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Red_blood_cell_distribution_width' target='_blank'>RDW**</a>"),
+                              required=False, help_text='12.3 - 15.4 %', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=1, max_value=44.2)#min_value=11.5, max_value=14.5)
+    Alpha_1_globulins1 = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Alpha_globulin' target='_blank'>Alpha-2-globulins**</a>"), 
+                                            required=False, help_text='5.1 - 8.5 g/l', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=1, max_value=20.17)#min_value=5.1, max_value=8.5)
+    Hematocrit = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Hematocrit' target='_blank'>Hematocrit**</a>"), 
+                                    required=False, help_text='37 - 50 %', widget=forms.NumberInput(attrs={'class': 'form-control'}), 
+                                      min_value=8, max_value=66)#min_value=37, max_value=50)
+    Lymphocytes = forms.FloatField( label=mark_safe("<a href='https://en.wikipedia.org/wiki/Lymphocyte' target='_blank'>Lymphocytes**</a>"),
+                                      required=False, help_text='20 - 40 %', widget=forms.NumberInput(attrs={'class': 'form-control '}), 
+                                      min_value=0, max_value=98)#min_value=20, max_value=40)
+    
+    country = LazyTypedChoiceField(choices=countries)
+    
+    class Meta:
+        widgets = {'country': CountrySelectWidget(attrs={'class': 'form-control '})}
 
 class IndexPage(TemplateView):
     template_name = 'website/index.html'
@@ -94,7 +132,14 @@ class InputForm(FormView):
     
     def dispatch(self, request, *args, **kwargs):
         
-        
+        try:
+            self.metric = self.request.GET['m']
+            if self.metric == 'us':
+                self.form_class=nnBloodFormUS
+            else:
+                self.form_class=nnBloodForm
+        except:
+            self.form_class=nnBloodForm
               
         return super(InputForm, self).dispatch(request, *args, **kwargs)
     
@@ -111,6 +156,7 @@ class InputForm(FormView):
     
     def form_valid(self, form):
         context = self.get_context_data()
+        metric = self.request.POST['metric']
         
         try:
             ip = get_client_ip(self.request)
@@ -118,15 +164,15 @@ class InputForm(FormView):
             ip = 'Undefined'
         
         age =  float(self.request.POST.get('age'))
-        if not age:
-            age=30
         sex = int(self.request.POST.get('sex', 1))
+        
         height = float(self.request.POST.get('height', 177))
-        if not height:
-            height = 177
+        if metric == 'us':
+            height = 2.54*height # convet inches to cm
         weight = float(self.request.POST.get('weight', 70.8))
-        if not weight:
-            weight = 70.8
+        if metric == 'us':
+            weight = 0.453592*weight # convert lb to kg
+        
         
         bmi = format((weight/(height**2))*10000, '.2f')
         
@@ -190,6 +236,18 @@ class InputForm(FormView):
         df.loc[:,'NEUT'] = pd.Series(form.cleaned_data.get('NEUT') if form.cleaned_data.get('NEUT') else 55.10)
         df.loc[:,'RDW'] = pd.Series(form.cleaned_data.get('RDW') if form.cleaned_data.get('RDW') else 13.71)
         
+        if metric == 'us':
+            df.loc[:,'Albumen'] = df.loc[:,'Albumen']*10.0
+            df.loc[:,'Glucose'] = df.loc[:,'Glucose']*0.0555
+            df.loc[:,'Alkaline phosphatase'] = df.loc[:,'Alkaline phosphatase']*1.0
+            df.loc[:,'Urea'] = df.loc[:,'Urea']*0.357
+            df.loc[:,'Erythrocytes'] = df.loc[:,'Erythrocytes']*1.0
+            df.loc[:,'Cholesterol'] = df.loc[:,'Cholesterol']*0.0259
+            df.loc[:,'RDW'] = df.loc[:,'RDW']*1.0
+            df.loc[:,'Alpha-1-globulins1'] = df.loc[:,'Alpha-1-globulins1']*1.0
+            df.loc[:,'Hematocrit'] = df.loc[:,'Hematocrit']*1.0
+            df.loc[:,'Lymphocytes, %'] = df.loc[:,'Lymphocytes, %']*1.0
+        
         
         df.rename(columns={'Alpha-1-globulins1': 'Alpha-1-globulins'}, inplace=True)
         
@@ -244,6 +302,7 @@ class InputForm(FormView):
     
         #saving to DB    
         new_test = RunnedTest(ip = ip,
+                              metric = metric,
                               age = age,
                               sex = sex,
                               weight = weight,
@@ -290,8 +349,13 @@ class nnMortalityResult(TemplateView):
             context['test_id'] = objTest.id
             context['expected_longevity'] = objTest.expected_longevity
             
+            
+            
+            
         except:
             context['expected_longevity'] = 'Undefined'
+            
+        context['result_text'] = Article.objects.get(idx='result_text')
             
 
         return context      
