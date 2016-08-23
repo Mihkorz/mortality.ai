@@ -106,7 +106,7 @@ $(function () {
 	
 	
 	$("#submitBtn").click(function(){
-		if($("#nnMortalityForm").valid() {
+		if($("#nnMortalityForm").valid()) {
 		    $("#pathmodal").modal("show");
 		}
 	});	
