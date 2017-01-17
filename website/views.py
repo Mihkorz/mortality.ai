@@ -149,6 +149,7 @@ class InputForm(FormView):
         context['how_its_done'] = Article.objects.get(idx='how_its_done')
         context['rules'] = Article.objects.get(idx='rules')
         context['desc'] = Article.objects.get(idx='desc')
+        context['partner'] = Article.objects.get(idx='partner')
         
         context['metric'] = self.metric        
         context['document'] = 'input_document'
